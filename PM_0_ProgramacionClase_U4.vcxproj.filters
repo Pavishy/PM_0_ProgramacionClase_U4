@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Object Include="..\..\..\..\..\..\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MACROS.inc" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="P0_Plantilla.asm" />
+    <MASM Include="P1_IntroArreglos.asm" />
+    <MASM Include="P2_Registros_esi_edi.asm" />
+    <MASM Include="P3_accesoArreglos.asm" />
+    <MASM Include="P4_modificarArreglo.asm" />
+    <MASM Include="P5_recorridoArreglo.asm" />
+    <MASM Include="PPT1_Imp_sum_arr_dat.asm" />
+    <MASM Include="P6_arreglos_dword.asm" />
+    <MASM Include="P7_AccesoPosNdeArreglo.asm" />
+    <MASM Include="P8_introArreglosBidimensionales.asm" />
+    <MASM Include="P9_accesoPosNdeArregloB.asm" />
+    <MASM Include="P10_RecorridoArreglosB.asm" />
+    <MASM Include="P9_APNAB_V1.asm" />
+    <MASM Include="PPT2_Cal_Sum_Tod_Elem_Mat.asm" />
+    <MASM Include="PPT3_Cal_Sum_Elem_Mat_Fi_A_Fi.asm" />
+    <MASM Include="PPT4_Cal_Elem_Mat_May_Num_Usu.asm" />
+    <MASM Include="PPT5_Prog_Ident_Elem_Mat_Par.asm" />
+  </ItemGroup>
+</Project>
