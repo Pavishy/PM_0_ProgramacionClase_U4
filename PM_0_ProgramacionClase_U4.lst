@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/15/21 17:59:45
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/16/21 20:39:00
 NombreProgram						     Page 1 - 1
 
 
@@ -8,9 +8,6 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/15/21 17:59:45
 				;Objetivo: Archivo de Ejemplo
 				;
 				; Autore(s):
-				;         Apellido Nombre Integrante 1
-				;         Apellido Nombre Integrante 2
-
 				; Semestre: 8vo Semestre ISC 
 				;FIN DESCRPICIÓN
 
@@ -65,6 +62,19 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/15/21 17:59:45
 			      C 		mov edx, offset mensaje
 			      C 		call writestring
 			      C 		call writedec
+			      C 		call crlf
+			      C 		pop edx  
+			      C ENDM
+			      C 
+			      C ImpPantallaLnV0 MACRO texto
+			      C 	local mensaje
+			      C 	.data
+			      C 		mensaje db texto,0
+			      C 	.code
+			      C 		push edx  
+			      C 		mov edx, offset mensaje
+			      C 		call writestring
+			      C 		call readdec
 			      C 		call crlf
 			      C 		pop edx  
 			      C ENDM
@@ -131,59 +141,67 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/15/21 17:59:45
 	   00000003
 	   00000004
 
- 00000030 00000003		filas_p dword 3
- 00000034 00000004		columnas_p dword 4
- 00000038 00000002		num dword 2
+ 00000030 00000002		num dword 2
 
  00000000			.code
 
- 00000000				sumatr4 PROC     ;;;;;;;;;FALTA
-						
-							
-					;escribe tu mensaje
-
+ 00000000				sumatr4 PROC 
 					
- 00000000  BB 00000000			mov ebx, 0
- 00000005  B9 0000000B			mov ecx, 11
+					ImpPantallaLn "Numeros pares de la matriz: "
+ 00000034		     1		.data
+ 00000034 4E 75 6D 65 72     1			??0000 db "Numeros pares de la matriz: ",0
+	   6F 73 20 70 61
+	   72 65 73 20 64
+	   65 20 6C 61 20
+	   6D 61 74 72 69
+	   7A 3A 20 00
+ 00000000		     1		.code
+ 00000000  52		     1			push edx  ; guardo en la pila el valor
+ 00000001  BA 00000034 R     1			mov edx, offset ??0000
+ 00000006  E8 00000000 E     1			call writestring
+ 0000000B  E8 00000000 E     1			call crlf
+ 00000010  5A		     1			pop edx   ;recupero el valor original de edx
 
- 0000000A				Ciclo:
- 0000000A  8B 04 8D				 mov eax, dword ptr[arreglo_p+ecx*4]
+ 00000011  BB 00000000			mov ebx, 0
+ 00000016  B9 0000000B			mov ecx, 11
+
+ 0000001B				Ciclo:
+ 0000001B  8B 04 8D				 mov eax, dword ptr[arreglo_p+ecx*4]
 	   00000000 R
- 00000011  50					 push eax
- 00000012  BA 00000000				 mov edx, 0
- 00000017  F7 35 00000038 R			 div num
- 0000001D  58					 pop eax
+ 00000022  50					 push eax
+ 00000023  BA 00000000				 mov edx, 0
+ 00000028  F7 35 00000030 R			 div num
+ 0000002E  58					 pop eax
 
-						 
- 0000001E  83 FA 00		         cmp edx, 0
- 00000021  75 02				    jne NextPart
+ 0000002F  83 FA 00		         cmp edx, 0
+ 00000032  75 02				    jne NextPart
 						  
- 00000023  43					  inc ebx
- 00000024  50					  push eax
+ 00000034  43					  inc ebx
+ 00000035  50					  push eax
 
- 00000025					 NextPart:
- 00000025  49						 dec ecx
- 00000026  83 F9 00					 cmp ecx, 0
- 00000029  7D DF				 jge Ciclo
+ 00000036					 NextPart:
+ 00000036  49						 dec ecx
+ 00000037  83 F9 00					 cmp ecx, 0
+ 0000003A  7D DF				 jge Ciclo
 
-
- 0000002B			   cicloprint:
+ 0000003C			   cicloprint:
 				        
- 0000002B  83 FB 00				cmp ebx, 0
- 0000002E  74 0E				 je salir
+ 0000003C  83 FB 00				cmp ebx, 0
+ 0000003F  74 0E				 je salir
 
- 00000030  4B					 dec ebx
- 00000031  58					 pop eax
- 00000032  E8 00000000 E			 call writeint
- 00000037  E8 00000000 E			 call crlf
- 0000003C  EB ED				 jmp cicloprint
+ 00000041  4B					 dec ebx
+ 00000042  58					 pop eax
+ 00000043  E8 00000000 E			 call writeint
+ 00000048  E8 00000000 E			 call crlf
+ 0000004D  EB ED				 jmp cicloprint
 					
- 0000003E				salir:
+ 0000004F				salir:
 					exit	
 					
- 00000045				sumatr4 ENDP
+ 00000056				sumatr4 ENDP
 					END sumatr4
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/15/21 17:59:45
+
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/16/21 20:39:00
 NombreProgram						     Symbols 2 - 1
 
 
@@ -193,6 +211,7 @@ Macros:
 
                 N a m e                 Type
 
+ImpPantallaLnV0  . . . . . . . .	Proc
 ImpPantallaLnV2  . . . . . . . .	Proc
 ImpPantallaLn  . . . . . . . . .	Proc
 ImpPantalla  . . . . . . . . . .	Proc
@@ -289,8 +308,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000003C Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000045 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000051 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000056 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -399,11 +418,11 @@ WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
-sumatr4  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000045 Public STDCALL
-  Ciclo  . . . . . . . . . . . .	L Near	 0000000A _TEXT	
-  NextPart . . . . . . . . . . .	L Near	 00000025 _TEXT	
-  cicloprint . . . . . . . . . .	L Near	 0000002B _TEXT	
-  salir  . . . . . . . . . . . .	L Near	 0000003E _TEXT	
+sumatr4  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000056 Public STDCALL
+  Ciclo  . . . . . . . . . . . .	L Near	 0000001B _TEXT	
+  NextPart . . . . . . . . . . .	L Near	 00000036 _TEXT	
+  cicloprint . . . . . . . . . .	L Near	 0000003C _TEXT	
+  salir  . . . . . . . . . . . .	L Near	 0000004F _TEXT	
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 
 
@@ -411,6 +430,7 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
+??0000 . . . . . . . . . . . . .	Byte	 00000034 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -624,10 +644,8 @@ arreglo_p  . . . . . . . . . . .	DWord	 00000000 _DATA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-columnas_p . . . . . . . . . . .	DWord	 00000034 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
-filas_p  . . . . . . . . . . . .	DWord	 00000030 _DATA	
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
@@ -637,7 +655,7 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-num  . . . . . . . . . . . . . .	DWord	 00000038 _DATA	
+num  . . . . . . . . . . . . . .	DWord	 00000030 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA

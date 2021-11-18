@@ -4,9 +4,6 @@ TITLE NombrePrograma
 ;Objetivo: Archivo de Ejemplo
 ;
 ; Autore(s):
-;         Apellido Nombre Integrante 1
-;         Apellido Nombre Integrante 2
-
 ; Semestre: 8vo Semestre ISC 
 ;FIN DESCRPICIÓN
 
@@ -19,18 +16,14 @@ arreglo_p dword 10, 12, 15, 20
 		    dword  7,  5, 10, 12
 			dword  1,  2,  3,  4
 
-filas_p dword 3
-columnas_p dword 4
 num dword 2
 
 .code
 
-	sumatr4 PROC     ;;;;;;;;;FALTA
-		
-			
-	;escribe tu mensaje
-
+	sumatr4 PROC 
 	
+	ImpPantallaLn "Numeros pares de la matriz: "
+
 	mov ebx, 0
 	mov ecx, 11
 
@@ -41,7 +34,6 @@ num dword 2
 		 div num
 		 pop eax
 
-		 
          cmp edx, 0
 		    jne NextPart
 		  
@@ -52,7 +44,6 @@ num dword 2
 			 dec ecx
 			 cmp ecx, 0
 		 jge Ciclo
-
 
    cicloprint:
         
@@ -70,3 +61,4 @@ num dword 2
 	
 	sumatr4 ENDP
 	END sumatr4
+

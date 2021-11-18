@@ -34,6 +34,19 @@ ImpPantallaLnV2 MACRO texto
 		pop edx  
 ENDM
 
+ImpPantallaLnV0 MACRO texto
+	local mensaje
+	.data
+		mensaje db texto,0
+	.code
+		push edx  
+		mov edx, offset mensaje
+		call writestring
+		call readdec
+		call crlf
+		pop edx  
+ENDM
+
 Suma_V1 MACRO  ; los valores que usará el macro son almacenados en registros en el programa principal
 			   ; y estos son consultados / accedidos desde el MACRO
 

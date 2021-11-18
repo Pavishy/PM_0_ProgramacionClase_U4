@@ -27,6 +27,12 @@
   <ItemGroup>
     <MASM Include="P0_Plantilla.asm" />
     <MASM Include="P10_RecorridoArreglosB.asm" />
+    <MASM Include="P11_copiarCadena.asm" />
+    <MASM Include="P12_compararCadenas.asm" />
+    <MASM Include="P13_buscarEnCadena.asm" />
+    <MASM Include="P14_indiceCaracterEnCadena.asm" />
+    <MASM Include="P14_IndiceCaracterEnCadena_V2.asm" />
+    <MASM Include="P15_AlmacenaCaracterEnCadena.asm" />
     <MASM Include="P1_IntroArreglos.asm" />
     <MASM Include="P2_Registros_esi_edi.asm" />
     <MASM Include="P3_accesoArreglos.asm" />

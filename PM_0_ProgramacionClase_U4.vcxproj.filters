@@ -24,5 +24,11 @@
     <MASM Include="PPT3_Cal_Sum_Elem_Mat_Fi_A_Fi.asm" />
     <MASM Include="PPT4_Cal_Elem_Mat_May_Num_Usu.asm" />
     <MASM Include="PPT5_Prog_Ident_Elem_Mat_Par.asm" />
+    <MASM Include="P11_copiarCadena.asm" />
+    <MASM Include="P12_compararCadenas.asm" />
+    <MASM Include="P13_buscarEnCadena.asm" />
+    <MASM Include="P14_indiceCaracterEnCadena.asm" />
+    <MASM Include="P15_AlmacenaCaracterEnCadena.asm" />
+    <MASM Include="P14_IndiceCaracterEnCadena_V2.asm" />
   </ItemGroup>
 </Project>

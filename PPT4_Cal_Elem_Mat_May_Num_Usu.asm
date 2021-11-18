@@ -19,16 +19,14 @@ arreglo_p dword 10, 12, 15, 20
 		    dword  7,  5, 10, 12
 			dword  1,  2,  3,  4
 
-filas_p dword 3
-columnas_p dword 4
 num dword ?
 
 .code
 
-	sumatr3 PROC    ;;;;;;;;;FALTA
+	sumatr3 PROC 
 	
 	;escribe tu mensaje
-	call readint
+	ImpPantallaLnV0 "Ingresa el numero: "
 	mov num, eax
 	mov ebx, 0
 	mov ecx, 11
@@ -55,7 +53,7 @@ num dword ?
 
 		 dec ebx
 		 pop eax
-		 call writeint
+		 ImpPantallaLnV2 "Numeros mayores: "
 		 call crlf
 		 jmp cicloprint
 	
@@ -63,3 +61,5 @@ num dword ?
 	exit	
 	sumatr3 ENDP
 	END sumatr3
+
+

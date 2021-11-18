@@ -77,7 +77,3 @@ suma dword ?
 
 	sumatr2 ENDP
 	END sumatr2
-
-;;; 298
-
-2
