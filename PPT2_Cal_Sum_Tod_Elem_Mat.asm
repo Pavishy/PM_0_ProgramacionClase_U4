@@ -33,7 +33,7 @@ suma dword ?
 
 	mov eax, ebx
 	
-	ImpPantallaLnV2 "La sumatoria de la matriz es: "
+	ImpPantalla_N_Ln "La sumatoria de la matriz es: "
 
 	exit
 

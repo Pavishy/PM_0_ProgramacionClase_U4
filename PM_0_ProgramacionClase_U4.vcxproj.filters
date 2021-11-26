@@ -30,5 +30,10 @@
     <MASM Include="P14_indiceCaracterEnCadena.asm" />
     <MASM Include="P15_AlmacenaCaracterEnCadena.asm" />
     <MASM Include="P14_IndiceCaracterEnCadena_V2.asm" />
+    <MASM Include="P16_cargarCaracterToAcumulador.asm" />
+    <MASM Include="P17_EjemploREP.asm" />
+    <MASM Include="P18_Ejemplo2REP.asm" />
+    <MASM Include="P19_EjemploPrefijosRepeticion.asm" />
+    <MASM Include="P20_PlantillaProyectoUnidad.asm" />
   </ItemGroup>
 </Project>

@@ -39,7 +39,7 @@ suma dword ?
 	jge ciclo
 
 	mov eax, ebx
-	ImpPantallaLnV2 "La sumatoria de la fila 1 es: "
+	ImpPantalla_N_Ln "La sumatoria de la fila 1 es: "
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	mov ecx, 7
@@ -55,7 +55,7 @@ suma dword ?
 	jge ciclo2
 
 	mov eax, ebx
-	ImpPantallaLnV2 "La sumatoria de la fila 2 es: "
+	ImpPantalla_N_Ln "La sumatoria de la fila 2 es: "
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	mov ecx, 11
@@ -71,7 +71,7 @@ suma dword ?
 	jge ciclo3
 
 	mov eax, ebx
-	ImpPantallaLnV2 "La sumatoria de la fila 3 es: "
+	ImpPantalla_N_Ln "La sumatoria de la fila 3 es: "
 
 	exit
 

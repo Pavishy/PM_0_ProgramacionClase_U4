@@ -31,7 +31,7 @@ arreglo_p byte 10, 12, 15, 20, 30, 8
 			inc edi
 		loop ciclo
 
-		ImpPantallaLnV2 "La sumatoria del arreglo es: "
+		ImpPantalla_N_Ln "La sumatoria del arreglo es: "
 	
 		;Tarea Programa. 
 		;Imprimir la Suma de los elementos del arreglo

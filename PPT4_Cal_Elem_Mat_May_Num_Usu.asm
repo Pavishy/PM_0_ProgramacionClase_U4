@@ -26,7 +26,7 @@ num dword ?
 	sumatr3 PROC 
 	
 	;escribe tu mensaje
-	ImpPantallaLnV0 "Ingresa el numero: "
+	ImpPantalla_N_Ln "Ingresa el numero: "
 	mov num, eax
 	mov ebx, 0
 	mov ecx, 11
@@ -53,7 +53,7 @@ num dword ?
 
 		 dec ebx
 		 pop eax
-		 ImpPantallaLnV2 "Numeros mayores: "
+		 ImpPantalla_N_Ln "Numeros mayores: "
 		 call crlf
 		 jmp cicloprint
 	

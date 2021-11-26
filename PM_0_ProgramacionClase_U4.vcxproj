@@ -33,7 +33,12 @@
     <MASM Include="P14_indiceCaracterEnCadena.asm" />
     <MASM Include="P14_IndiceCaracterEnCadena_V2.asm" />
     <MASM Include="P15_AlmacenaCaracterEnCadena.asm" />
+    <MASM Include="P16_cargarCaracterToAcumulador.asm" />
+    <MASM Include="P17_EjemploREP.asm" />
+    <MASM Include="P18_Ejemplo2REP.asm" />
+    <MASM Include="P19_EjemploPrefijosRepeticion.asm" />
     <MASM Include="P1_IntroArreglos.asm" />
+    <MASM Include="P20_PlantillaProyectoUnidad.asm" />
     <MASM Include="P2_Registros_esi_edi.asm" />
     <MASM Include="P3_accesoArreglos.asm" />
     <MASM Include="P4_modificarArreglo.asm" />
@@ -124,7 +129,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>sumatr4</EntryPointSymbol>
+      <EntryPointSymbol>main20</EntryPointSymbol>
       <ImportLibrary>C:\Irvine</ImportLibrary>
     </Link>
     <MASM>

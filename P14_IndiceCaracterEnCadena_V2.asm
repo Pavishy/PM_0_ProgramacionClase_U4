@@ -20,7 +20,7 @@ cadena_A_p14 db "Hola Mundx",0
 
 .code
 
-	main14 PROC	
+	main14v2 PROC	
 		;Lógica del Programa		
 		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 		
@@ -74,8 +74,8 @@ cadena_A_p14 db "Hola Mundx",0
 
 		exit	
 	
-	main14 ENDP
+	main14v2 ENDP
 	
-	END main14
+	END main14v2
 
 	;Tareaa  INVESTIGAR "PREFIJOS DE REPITICION"
