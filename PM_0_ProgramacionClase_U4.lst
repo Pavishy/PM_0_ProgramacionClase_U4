@@ -1,17 +1,14 @@
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/25/21 20:00:38
-Intro Cadena						     Page 1 - 1
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    12/01/21 18:11:48
+JUEGO DEL AHORCAD					     Page 1 - 1
 
 
-				TITLE Intro Cadenas
+				TITLE JUEGO DEL AHORCADO
 
 				;DESCRPICIÓN 
 				;Objetivo:  
-				;
-				; Autore(s):
-				;         García Ruiz Alejandro H.
-
-
-				; Semestre: 8vo Semestre ISC 
+				;Autore(s):
+				;         Mi Equipo
+				;Semestre: 8vo Semestre ISC 
 				;FIN DESCRPICIÓN
 
 				INCLUDE Irvine32.inc  
@@ -32,7 +29,6 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/25/21 20:00:38
 			      C .NOLIST
 			      C .LIST
 			      C 
-
 				INCLUDE MACROS.inc
 			      C ImpPantalla_N_Ln MACRO texto
 			      C 	local mensaje
@@ -234,14 +230,13 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/25/21 20:00:38
  00000000			.data
 				; Área de Declaración de Variables
 
-				;                           INDICE
- 00000000 50 45 52 52 4F	palabras_20 db "PERRO",0    ; 0
+ 00000000 50 45 52 52 4F	palabras_arreglo db "PERRO",0    ; 0
 	   00
  00000006  47 41 54 4F 2D				db "GATO-",0    ; 6
 	   00
  0000000C  4F 53 4F 2D 2D				db "OSO--",0    ; 12
 	   00
- 00000012  41 5A 2D 2D 2D				db "AZ---",0    ; 18
+ 00000012  50 41 5A 2D 2D				db "PAZ--",0    ; 18
 	   00
  00000018  46 4F 43 4F 2D				db "FOCO-",0	; 24	 
 	   00
@@ -250,273 +245,577 @@ Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/25/21 20:00:38
  00000024  4C 41 50 49 5A				db "LAPIZ",0    ; 36
 	   00
 
- 0000002A 2D 00			espacio_20 db "-",0
- 0000002C 00000005		vidas dword 5
-
- 00000030  0000000F [		palabraSeleccionada_20 db 15 dup(0) 
+ 0000002A 2D 00			Espacio db "-",0
+ 0000002C  0000000F [		palabraSeleccionada db 15 dup(0) 
 	    00
 	   ]
 
- 0000003F 00000000		contador_20 dword 0
+ 0000003B 0000000A		Vidas dword 10
+ 0000003F 00000000		contador dword 0
+ 00000043 00000000		LetrasDescubiertas dword 0
+ 00000047 00000000		Elije dword 0
 
- 00000043  0000000F [		palabraEscondida_20 db 15 dup(0)   ; "....."  .. es un punto por cada letra a descrubir
+ 0000004B  0000000F [		palabraEscondida db 15 dup(0)
 	    00
 	   ]
 
  00000000			.code
 
- 00000000				main20 PROC	
-						;Lógica del Programa				
+ 00000000				ahorcado PROC	
+							;Lógica del Programa		
+							
+							ImpPantallaLn "    JUEGO DEL AHORCADO _ _ _ _ _"
+ 0000005A		     1		.data
+ 0000005A 20 20 20 20 4A     1			??0000 db "    JUEGO DEL AHORCADO _ _ _ _ _",0
+	   55 45 47 4F 20
+	   44 45 4C 20 41
+	   48 4F 52 43 41
+	   44 4F 20 5F 20
+	   5F 20 5F 20 5F
+	   20 5F 00
+ 00000000		     1		.code
+ 00000000  52		     1			push edx  ; guardo en la pila el valor
+ 00000001  BA 0000005A R     1			mov edx, offset ??0000
+ 00000006  E8 00000000 E     1			call writestring
+ 0000000B  E8 00000000 E     1			call crlf
+ 00000010  5A		     1			pop edx   ;recupero el valor original de edx
+							ImpPantallaLn "(X)                            O"
+ 0000007B		     1		.data
+ 0000007B 28 58 29 20 20     1			??0001 db "(X)                            O",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 4F 00
+ 00000011		     1		.code
+ 00000011  52		     1			push edx  ; guardo en la pila el valor
+ 00000012  BA 0000007B R     1			mov edx, offset ??0001
+ 00000017  E8 00000000 E     1			call writestring
+ 0000001C  E8 00000000 E     1			call crlf
+ 00000021  5A		     1			pop edx   ;recupero el valor original de edx
+							ImpPantallaLn "(0J0)                         /|\"
+ 0000009C		     1		.data
+ 0000009C 28 30 4A 30 29     1			??0002 db "(0J0)                         /|\",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   2F 7C 5C 00
+ 00000022		     1		.code
+ 00000022  52		     1			push edx  ; guardo en la pila el valor
+ 00000023  BA 0000009C R     1			mov edx, offset ??0002
+ 00000028  E8 00000000 E     1			call writestring
+ 0000002D  E8 00000000 E     1			call crlf
+ 00000032  5A		     1			pop edx   ;recupero el valor original de edx
+							ImpPantallaLn "(UwU)                          |"
+ 000000BE		     1		.data
+ 000000BE 28 55 77 55 29     1			??0003 db "(UwU)                          |",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 7C 00
+ 00000033		     1		.code
+ 00000033  52		     1			push edx  ; guardo en la pila el valor
+ 00000034  BA 000000BE R     1			mov edx, offset ??0003
+ 00000039  E8 00000000 E     1			call writestring
+ 0000003E  E8 00000000 E     1			call crlf
+ 00000043  5A		     1			pop edx   ;recupero el valor original de edx
+							ImpPantallaLn "(#)                           / \"
+ 000000DF		     1		.data
+ 000000DF 28 23 29 20 20     1			??0004 db "(#)                           / \",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   2F 20 5C 00
+ 00000044		     1		.code
+ 00000044  52		     1			push edx  ; guardo en la pila el valor
+ 00000045  BA 000000DF R     1			mov edx, offset ??0004
+ 0000004A  E8 00000000 E     1			call writestring
+ 0000004F  E8 00000000 E     1			call crlf
+ 00000054  5A		     1			pop edx   ;recupero el valor original de edx
+
+ 00000055			Play:
 
 							Semilla  
- 00000052		     1		.data
- 00000000		     1		.code
- 00000000  E8 00000000 E     1		call randomize
+ 00000101		     1		.data
+ 00000055		     1		.code
+ 00000055  E8 00000000 E     1		call randomize
 
- 00000005  B8 00000007					mov eax, 7     
+ 0000005A  B8 00000007					mov eax, 7     
 							RangoAl 
- 00000052		     1		.data
- 0000000A		     1		.code
- 0000000A  E8 00000000 E     1		call randomrange
+ 00000101		     1		.data
+ 0000005F		     1		.code
+ 0000005F  E8 00000000 E     1		call randomrange
 
- 0000000F  BB 00000006					mov ebx, 6     
- 00000014  F7 E3					mul ebx  
+ 00000064  BB 00000006					mov ebx, 6     
+ 00000069  F7 E3					mul ebx  
 
-							
- 00000016  BE 00000000 R				mov esi, offset palabras_20  
- 0000001B  03 F0					add esi, eax  
+ 0000006B  BE 00000000 R				mov esi, offset palabras_arreglo  
+ 00000070  03 F0					add esi, eax  
+ 00000072  BF 0000002C R				mov edi, offset palabraSeleccionada
+ 00000077  B9 00000006					mov ecx, 6  
 
- 0000001D  BF 00000030 R				mov edi, offset palabraSeleccionada_20 
+ 0000007C			ciclo:				
 
- 00000022  B9 00000006					mov ecx, 6  
+ 0000007C  8B DF						mov ebx, edi  
+ 0000007E  BF 0000002A R					mov edi, offset Espacio
+ 00000083  A6							cmpsb  	
+ 00000084  74 14						jz detener   
 
- 00000027						ciclo:				
-
- 00000027  8B DF						mov ebx, edi  
+ 00000086  FF 05 0000003F R						inc contador   
 								
- 00000029  BF 0000002A R					mov edi, offset espacio_20
- 0000002E  A6							cmpsb  	
-
- 0000002F  74 14						jz detener   
-
-								
- 00000031  FF 05 0000003F R						inc contador_20   
-								
- 00000037  4E								dec esi					
+ 0000008C  4E								dec esi					
 											
- 00000038  8B FB							mov edi, ebx  
- 0000003A  8B C7							mov eax, edi
+ 0000008D  8B FB							mov edi, ebx  
+ 0000008F  8B C7							mov eax, edi
 								
- 0000003C  A4								movsb ;copiar el valor 
+ 00000091  A4								movsb 
 									
- 0000003D  E2 E8						loop ciclo
+ 00000092  E2 E8						loop ciclo
 
- 0000003F  FF 0D 0000003F R						dec contador_20
+ 00000094  FF 0D 0000003F R						dec contador
 
- 00000045						detener:
-							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 0000009A						detener:
 
-										
+ 0000009A  8B 0D 0000003F R					mov ecx, contador  
 
-							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-							;Salto
-							;ImpPantalla_N_Ln "Palabra Seleccionada: "
-							;mov edx, offset palabraSeleccionada_20
-							;EscribirTXT
-							;Salto
+ 000000A0  BF 0000004B R					mov edi, offset palabraEscondida
 
-							;;;;GENERAR PALABRA ESCONDIDA... 
+ 000000A5  B8 00000000						mov eax, 0
+ 000000AA  B0 2E						mov al, "."     
 
- 00000045  8B 0D 0000003F R					mov ecx, contador_20  
-
- 0000004B  BF 00000043 R					mov edi, offset palabraEscondida_20
-
- 00000050  B8 00000000						mov eax, 0
- 00000055  B0 2E						mov al, "."     
-
- 00000057  F3/ AA						rep stosb
+ 000000AC  F3/ AA						rep stosb
 								
 							Salto
- 00000052		     1		.data
- 00000059		     1		.code
- 00000059  E8 00000000 E     1			call crlf
+ 00000101		     1		.data
+ 000000AE		     1		.code
+ 000000AE  E8 00000000 E     1			call crlf
 							ImpPantalla_N_Ln "Palabra Escondida: "
- 00000052		     1		.data
- 00000052 50 61 6C 61 62     1			??0000 db "Palabra Escondida: ",0
+ 00000101		     1		.data
+ 00000101 50 61 6C 61 62     1			??0005 db "Palabra Escondida: ",0
 	   72 61 20 45 73
 	   63 6F 6E 64 69
 	   64 61 3A 20 00
- 0000005E		     1		.code
- 0000005E  52		     1			push edx  ; guardo en la pila el valor
- 0000005F  BA 00000052 R     1			mov edx, offset ??0000
- 00000064  E8 00000000 E     1			call writestring
- 00000069  5A		     1			pop edx   ;recupero el valor original de edx
- 0000006A  BA 00000043 R				mov edx, offset palabraEscondida_20
+ 000000B3		     1		.code
+ 000000B3  52		     1			push edx  ; guardo en la pila el valor
+ 000000B4  BA 00000101 R     1			mov edx, offset ??0005
+ 000000B9  E8 00000000 E     1			call writestring
+ 000000BE  5A		     1			pop edx   ;recupero el valor original de edx
+ 000000BF  BA 0000004B R				mov edx, offset palabraEscondida
 							EscribirTXT
- 00000066		     1		.data
- 0000006F		     1		.code
- 0000006F  E8 00000000 E     1		call writestring
+ 00000115		     1		.data
+ 000000C4		     1		.code
+ 000000C4  E8 00000000 E     1		call writestring
 							Salto
- 00000066		     1		.data
- 00000074		     1		.code
- 00000074  E8 00000000 E     1			call crlf
+ 00000115		     1		.data
+ 000000C9		     1		.code
+ 000000C9  E8 00000000 E     1			call crlf
 
-							
-							; PROCEDIMIENTO EN DESARROLLO..."BUSCAR UNA LETRA EN LA PALABRA"
+ 000000CE			MainMenu:	
 
-
- 00000079				MainMenu:	
-
- 00000079  B8 00000000					MOV EAX, 0
-
+ 000000CE  B8 00000000					mov eax, 0
 							Salto
- 00000066		     1		.data
- 0000007E		     1		.code
- 0000007E  E8 00000000 E     1			call crlf
-							Salto
- 00000066		     1		.data
- 00000083		     1		.code
- 00000083  E8 00000000 E     1			call crlf
+ 00000115		     1		.data
+ 000000D3		     1		.code
+ 000000D3  E8 00000000 E     1			call crlf
 
-							ImpPantalla_N_Ln "Ingresa una Letra:  "
- 00000066		     1		.data
- 00000066 49 6E 67 72 65     1			??0001 db "Ingresa una Letra:  ",0
+							ImpPantalla_N_Ln "Ingresa una Letra en Mayuscula:  "
+ 00000115		     1		.data
+ 00000115 49 6E 67 72 65     1			??0006 db "Ingresa una Letra en Mayuscula:  ",0
 	   73 61 20 75 6E
 	   61 20 4C 65 74
-	   72 61 3A 20 20
-	   00
- 00000088		     1		.code
- 00000088  52		     1			push edx  ; guardo en la pila el valor
- 00000089  BA 00000066 R     1			mov edx, offset ??0001
- 0000008E  E8 00000000 E     1			call writestring
- 00000093  5A		     1			pop edx   ;recupero el valor original de edx
+	   72 61 20 65 6E
+	   20 4D 61 79 75
+	   73 63 75 6C 61
+	   3A 20 20 00
+ 000000D8		     1		.code
+ 000000D8  52		     1			push edx  ; guardo en la pila el valor
+ 000000D9  BA 00000115 R     1			mov edx, offset ??0006
+ 000000DE  E8 00000000 E     1			call writestring
+ 000000E3  5A		     1			pop edx   ;recupero el valor original de edx
 							LeerCARACTER  
- 0000007B		     1		.data
- 00000094		     1		.code
- 00000094  E8 00000000 E     1		call readchar
+ 00000137		     1		.data
+ 000000E4		     1		.code
+ 000000E4  E8 00000000 E     1		call readchar
 							EscribirCARACTER 
- 0000007B		     1		.data
- 00000099		     1		.code
- 00000099  E8 00000000 E     1		call writechar
-
+ 00000137		     1		.data
+ 000000E9		     1		.code
+ 000000E9  E8 00000000 E     1		call writechar
 							Salto
- 0000007B		     1		.data
- 0000009E		     1		.code
- 0000009E  E8 00000000 E     1			call crlf
+ 00000137		     1		.data
+ 000000EE		     1		.code
+ 000000EE  E8 00000000 E     1			call crlf
 
 							ImpPantalla_N_Ln "La Letra ingresada es: "
- 0000007B		     1		.data
- 0000007B 4C 61 20 4C 65     1			??0002 db "La Letra ingresada es: ",0
+ 00000137		     1		.data
+ 00000137 4C 61 20 4C 65     1			??0007 db "La Letra ingresada es: ",0
 	   74 72 61 20 69
 	   6E 67 72 65 73
 	   61 64 61 20 65
 	   73 3A 20 00
- 000000A3		     1		.code
- 000000A3  52		     1			push edx  ; guardo en la pila el valor
- 000000A4  BA 0000007B R     1			mov edx, offset ??0002
- 000000A9  E8 00000000 E     1			call writestring
- 000000AE  5A		     1			pop edx   ;recupero el valor original de edx
+ 000000F3		     1		.code
+ 000000F3  52		     1			push edx  ; guardo en la pila el valor
+ 000000F4  BA 00000137 R     1			mov edx, offset ??0007
+ 000000F9  E8 00000000 E     1			call writestring
+ 000000FE  5A		     1			pop edx   ;recupero el valor original de edx
 							;sub al,20H
 							EscribirCARACTER 
- 00000093		     1		.data
- 000000AF		     1		.code
- 000000AF  E8 00000000 E     1		call writechar
+ 0000014F		     1		.data
+ 000000FF		     1		.code
+ 000000FF  E8 00000000 E     1		call writechar
 
-							;;;;;;;;
 							Salto
- 00000093		     1		.data
- 000000B4		     1		.code
- 000000B4  E8 00000000 E     1			call crlf
+ 0000014F		     1		.data
+ 00000104		     1		.code
+ 00000104  E8 00000000 E     1			call crlf
+
+ 00000109  BF 0000002C R				mov edi, offset palabraSeleccionada				
+ 0000010E  BE 0000004B R				mov esi, offset palabraEscondida  
+ 00000113  8B 0D 0000003F R				mov ecx, contador
+
+ 00000119			ciclo2:
+
+ 00000119  46							inc esi 
+ 0000011A  AE							scasb  		
+								
+ 0000011B  75 0E						jnz continuar 
+
+ 0000011D  4E								dec esi 
+ 0000011E  87 F7							xchg esi, edi
+ 00000120  AA								stosb     				
+ 00000121  4F								dec edi  
+
+ 00000122  87 F7							xchg esi, edi 			
+ 00000124  46								inc esi
+									
+ 00000125  FF 05 00000043 R						inc letrasdescubiertas
+
+ 0000012B			continuar:							
+								
+ 0000012B  E2 EC					loop ciclo2
+						
 							Salto
- 00000093		     1		.data
- 000000B9		     1		.code
- 000000B9  E8 00000000 E     1			call crlf
-
- 000000BE  BF 00000030 R				mov edi, offset palabraSeleccionada_20	;	para buscar el caracter ingresado			
- 000000C3  BE 00000043 R				mov esi, offset palabraEscondida_20   ; si existe, se usara para reeemplazar al punto por su caracter
-
- 000000C8  8B 0D 0000003F R				mov ecx, contador_20 ;
-
- 000000CE						ciclo2:
-
- 000000CE  46							inc esi ; para mantener en el mismo indice a ambas palabras para que ambos registros cuenten con la misma cantidad y no se reemplazen los
-								; indices incorrectos, ya que esi debe de incrementar su espacio porque edi por medi de scasb incrementa en 1
-
- 000000CF  AE							scasb  ; compara lo que esta en el acumulador con la memoria direccionada				
-												
-								; if es igual a cero.. then sobreescribimos con esa letra
-								; else no hacemos nada
-
-								
- 000000D0  75 08						jnz continuar  ; si no es igual
-								
-								; si es cero, entoces se realiza: 
-
- 000000D2  4E								dec esi  ; regresa al indice en el que fue igual
- 000000D3  87 F7							xchg esi, edi; intercambia "seleccionada" por "escondida"
- 000000D5  AA								stosb     				
- 000000D6  4F								dec edi   ; se debe decrementar en uno, debido a que edi se incremento 
-											  ; de manera automatica con stosb 
-
- 000000D7  87 F7							xchg esi, edi ;se regresan las palabras nuevamente a como estaban al principio					
- 000000D9  46								inc esi
-
- 000000DA							continuar:							
-								
- 000000DA  E2 F2					loop ciclo2
-
-							
-							Salto
- 00000093		     1		.data
- 000000DC		     1		.code
- 000000DC  E8 00000000 E     1			call crlf
+ 0000014F		     1		.data
+ 0000012D		     1		.code
+ 0000012D  E8 00000000 E     1			call crlf
 							ImpPantalla_N_Ln "Palabra Escondida: "
- 00000093		     1		.data
- 00000093 50 61 6C 61 62     1			??0003 db "Palabra Escondida: ",0
+ 0000014F		     1		.data
+ 0000014F 50 61 6C 61 62     1			??0008 db "Palabra Escondida: ",0
 	   72 61 20 45 73
 	   63 6F 6E 64 69
 	   64 61 3A 20 00
- 000000E1		     1		.code
- 000000E1  52		     1			push edx  ; guardo en la pila el valor
- 000000E2  BA 00000093 R     1			mov edx, offset ??0003
- 000000E7  E8 00000000 E     1			call writestring
- 000000EC  5A		     1			pop edx   ;recupero el valor original de edx
- 000000ED  BA 00000043 R				mov edx, offset palabraEscondida_20
+ 00000132		     1		.code
+ 00000132  52		     1			push edx  ; guardo en la pila el valor
+ 00000133  BA 0000014F R     1			mov edx, offset ??0008
+ 00000138  E8 00000000 E     1			call writestring
+ 0000013D  5A		     1			pop edx   ;recupero el valor original de edx
+ 0000013E  BA 0000004B R				mov edx, offset palabraEscondida
 							EscribirTXT
- 000000A7		     1		.data
- 000000F2		     1		.code
- 000000F2  E8 00000000 E     1		call writestring
+ 00000163		     1		.data
+ 00000143		     1		.code
+ 00000143  E8 00000000 E     1		call writestring
 							Salto
- 000000A7		     1		.data
- 000000F7		     1		.code
- 000000F7  E8 00000000 E     1			call crlf
-
+ 00000163		     1		.data
+ 00000148		     1		.code
+ 00000148  E8 00000000 E     1			call crlf
+ 0000014D  EB 05					jmp Comparar
+							Salto
+ 00000163		     1		.data
+ 0000014F		     1		.code
+ 0000014F  E8 00000000 E     1			call crlf
 							
- 000000FC  E9 FFFFFF78					JMP MainMenu
+ 00000154			Comparar:
+ 00000154  8B 0D 00000043 R					mov ecx,LetrasDescubiertas
+ 0000015A  39 0D 0000003F R					cmp contador,ecx
+ 00000160  74 02						jz esigual
+ 00000162  75 64						jnz noesigual
+ 00000164							esigual:
+									Salto
+ 00000163		     1		.data
+ 00000164		     1		.code
+ 00000164  E8 00000000 E     1			call crlf
+									ImpPantallaLn "    (UwU)  GANASTE!!! (UwU)"
+ 00000163		     1		.data
+ 00000163 20 20 20 20 28     1			??0009 db "    (UwU)  GANASTE!!! (UwU)",0
+	   55 77 55 29 20
+	   20 47 41 4E 41
+	   53 54 45 21 21
+	   21 20 28 55 77
+	   55 29 00
+ 00000169		     1		.code
+ 00000169  52		     1			push edx  ; guardo en la pila el valor
+ 0000016A  BA 00000163 R     1			mov edx, offset ??0009
+ 0000016F  E8 00000000 E     1			call writestring
+ 00000174  E8 00000000 E     1			call crlf
+ 00000179  5A		     1			pop edx   ;recupero el valor original de edx
+									
+									ImpPantallaLn "              \O/"
+ 0000017F		     1		.data
+ 0000017F 20 20 20 20 20     1			??000A db "              \O/",0
+	   20 20 20 20 20
+	   20 20 20 20 5C
+	   4F 2F 00
+ 0000017A		     1		.code
+ 0000017A  52		     1			push edx  ; guardo en la pila el valor
+ 0000017B  BA 0000017F R     1			mov edx, offset ??000A
+ 00000180  E8 00000000 E     1			call writestring
+ 00000185  E8 00000000 E     1			call crlf
+ 0000018A  5A		     1			pop edx   ;recupero el valor original de edx
+									ImpPantallaLn "               |"
+ 00000191		     1		.data
+ 00000191 20 20 20 20 20     1			??000B db "               |",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   7C 00
+ 0000018B		     1		.code
+ 0000018B  52		     1			push edx  ; guardo en la pila el valor
+ 0000018C  BA 00000191 R     1			mov edx, offset ??000B
+ 00000191  E8 00000000 E     1			call writestring
+ 00000196  E8 00000000 E     1			call crlf
+ 0000019B  5A		     1			pop edx   ;recupero el valor original de edx
+									ImpPantallaLn "               |"
+ 000001A2		     1		.data
+ 000001A2 20 20 20 20 20     1			??000C db "               |",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   7C 00
+ 0000019C		     1		.code
+ 0000019C  52		     1			push edx  ; guardo en la pila el valor
+ 0000019D  BA 000001A2 R     1			mov edx, offset ??000C
+ 000001A2  E8 00000000 E     1			call writestring
+ 000001A7  E8 00000000 E     1			call crlf
+ 000001AC  5A		     1			pop edx   ;recupero el valor original de edx
+									ImpPantallaLn "              / \"
+ 000001B3		     1		.data
+ 000001B3 20 20 20 20 20     1			??000D db "              / \",0
+	   20 20 20 20 20
+	   20 20 20 20 2F
+	   20 5C 00
+ 000001AD		     1		.code
+ 000001AD  52		     1			push edx  ; guardo en la pila el valor
+ 000001AE  BA 000001B3 R     1			mov edx, offset ??000D
+ 000001B3  E8 00000000 E     1			call writestring
+ 000001B8  E8 00000000 E     1			call crlf
+ 000001BD  5A		     1			pop edx   ;recupero el valor original de edx
+ 000001BE  E9 000000B9							jmp Reintentar
+									Salto
+ 000001C5		     1		.data
+ 000001C3		     1		.code
+ 000001C3  E8 00000000 E     1			call crlf
+									
+ 000001C8			noesigual:
+ 000001C8  FF 0D 0000003B R						dec vidas
+ 000001CE  A1 0000003B R						mov eax,vidas
+									ImpPantalla_N_Ln "VIDA #"
+ 000001C5		     1		.data
+ 000001C5 56 49 44 41 20     1			??000E db "VIDA #",0
+	   23 00
+ 000001D3		     1		.code
+ 000001D3  52		     1			push edx  ; guardo en la pila el valor
+ 000001D4  BA 000001C5 R     1			mov edx, offset ??000E
+ 000001D9  E8 00000000 E     1			call writestring
+ 000001DE  5A		     1			pop edx   ;recupero el valor original de edx
+									EscribirNUM
+ 000001CC		     1		.data
+ 000001DF		     1		.code
+ 000001DF  E8 00000000 E     1		call writedec
+									Salto
+ 000001CC		     1		.data
+ 000001E4		     1		.code
+ 000001E4  E8 00000000 E     1			call crlf
+ 000001E9  EB 05							jmp Fin
+									Salto
+ 000001CC		     1		.data
+ 000001EB		     1		.code
+ 000001EB  E8 00000000 E     1			call crlf
 							
+ 000001F0			Fin:
+ 000001F0  83 3D 0000003B R						cmp vidas,0
+	   00
+ 000001F7  74 02							jz sale
+ 000001F9  75 7C							jnz continua
+ 000001FB								sale:
+										Salto
+ 000001CC		     1		.data
+ 000001FB		     1		.code
+ 000001FB  E8 00000000 E     1			call crlf
+										ImpPantallaLn " (X) FIN DEL JUEGO ! PERDISTE (X)"
+ 000001CC		     1		.data
+ 000001CC 20 28 58 29 20     1			??000F db " (X) FIN DEL JUEGO ! PERDISTE (X)",0
+	   46 49 4E 20 44
+	   45 4C 20 4A 55
+	   45 47 4F 20 21
+	   20 50 45 52 44
+	   49 53 54 45 20
+	   28 58 29 00
+ 00000200		     1		.code
+ 00000200  52		     1			push edx  ; guardo en la pila el valor
+ 00000201  BA 000001CC R     1			mov edx, offset ??000F
+ 00000206  E8 00000000 E     1			call writestring
+ 0000020B  E8 00000000 E     1			call crlf
+ 00000210  5A		     1			pop edx   ;recupero el valor original de edx
+										ImpPantallaLn "                _"
+ 000001EE		     1		.data
+ 000001EE 20 20 20 20 20     1			??0010 db "                _",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 5F 00
+ 00000211		     1		.code
+ 00000211  52		     1			push edx  ; guardo en la pila el valor
+ 00000212  BA 000001EE R     1			mov edx, offset ??0010
+ 00000217  E8 00000000 E     1			call writestring
+ 0000021C  E8 00000000 E     1			call crlf
+ 00000221  5A		     1			pop edx   ;recupero el valor original de edx
+										ImpPantallaLn "               /|\"
+ 00000200		     1		.data
+ 00000200 20 20 20 20 20     1			??0011 db "               /|\",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   2F 7C 5C 00
+ 00000222		     1		.code
+ 00000222  52		     1			push edx  ; guardo en la pila el valor
+ 00000223  BA 00000200 R     1			mov edx, offset ??0011
+ 00000228  E8 00000000 E     1			call writestring
+ 0000022D  E8 00000000 E     1			call crlf
+ 00000232  5A		     1			pop edx   ;recupero el valor original de edx
+										ImpPantallaLn "                |"
+ 00000213		     1		.data
+ 00000213 20 20 20 20 20     1			??0012 db "                |",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 7C 00
+ 00000233		     1		.code
+ 00000233  52		     1			push edx  ; guardo en la pila el valor
+ 00000234  BA 00000213 R     1			mov edx, offset ??0012
+ 00000239  E8 00000000 E     1			call writestring
+ 0000023E  E8 00000000 E     1			call crlf
+ 00000243  5A		     1			pop edx   ;recupero el valor original de edx
+										ImpPantallaLn "               \ /"
+ 00000225		     1		.data
+ 00000225 20 20 20 20 20     1			??0013 db "               \ /",0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   5C 20 2F 00
+ 00000244		     1		.code
+ 00000244  52		     1			push edx  ; guardo en la pila el valor
+ 00000245  BA 00000225 R     1			mov edx, offset ??0013
+ 0000024A  E8 00000000 E     1			call writestring
+ 0000024F  E8 00000000 E     1			call crlf
+ 00000254  5A		     1			pop edx   ;recupero el valor original de edx
+										Salto
+ 00000238		     1		.data
+ 00000255		     1		.code
+ 00000255  E8 00000000 E     1			call crlf
+										ImpPantalla_N_Ln "La Palabra Era: "
+ 00000238		     1		.data
+ 00000238 4C 61 20 50 61     1			??0014 db "La Palabra Era: ",0
+	   6C 61 62 72 61
+	   20 45 72 61 3A
+	   20 00
+ 0000025A		     1		.code
+ 0000025A  52		     1			push edx  ; guardo en la pila el valor
+ 0000025B  BA 00000238 R     1			mov edx, offset ??0014
+ 00000260  E8 00000000 E     1			call writestring
+ 00000265  5A		     1			pop edx   ;recupero el valor original de edx
+ 00000266  BA 0000002C R							mov edx, offset palabraSeleccionada
+										EscribirTXT
+ 00000249		     1		.data
+ 0000026B		     1		.code
+ 0000026B  E8 00000000 E     1		call writestring
+										Salto
+ 00000249		     1		.data
+ 00000270		     1		.code
+ 00000270  E8 00000000 E     1			call crlf
+ 00000275  EB 05								jmp Reintentar
+ 00000277								continua:
+ 00000277  E9 FFFFFE52								jmp MainMenu
 
-							;jz esigual
-							;jnz noesigual
-							;esigual:
-							;	ImpPantallaLn "Es igual"
-							;	jmp MainMenu
+ 0000027C			Reintentar:
+									Salto
+ 00000249		     1		.data
+ 0000027C		     1		.code
+ 0000027C  E8 00000000 E     1			call crlf
+									ImpPantalla "Quieres Volver a Jugar??? (SI: 0 / NO: 1): "
+ 00000249		     1		.data
+ 00000249 51 75 69 65 72     1			??0015 db "Quieres Volver a Jugar??? (SI: 0 / NO: 1): ",0
+	   65 73 20 56 6F
+	   6C 76 65 72 20
+	   61 20 4A 75 67
+	   61 72 3F 3F 3F
+	   20 28 53 49 3A
+	   20 30 20 2F 20
+	   4E 4F 3A 20 31
+	   29 3A 20 00
+ 00000281		     1		.code
+ 00000281  52		     1			push edx  ; guardo en la pila el valor
+ 00000282  BA 00000249 R     1			mov edx, offset ??0015
+ 00000287  E8 00000000 E     1			call writestring		
+ 0000028C  5A		     1			pop edx   ;recupero el valor original de edx
+									LeeNTeclado
+ 00000275		     1		.data
+ 0000028D		     1		.code
+ 0000028D  E8 00000000 E     1		call readdec
+									Salto
+ 00000275		     1		.data
+ 00000292		     1		.code
+ 00000292  E8 00000000 E     1			call crlf
+ 00000297  A3 00000047 R						mov Elije, eax
+									Salto
+ 00000275		     1		.data
+ 0000029C		     1		.code
+ 0000029C  E8 00000000 E     1			call crlf
+ 000002A1  83 3D 00000047 R						cmp Elije,0
+	   00
+ 000002A8  74 02							jz Jugar
+ 000002AA  EB 48							jmp Salir
 
-							;noesigual:
-							;	ImpPantallaLn "NO es igual"
-							;	jmp MainMenu
+ 000002AC			Jugar:
+								ImpPantallaLn "(0J0) -NUEVA PARTIDA- (0J0)"
+ 00000275		     1		.data
+ 00000275 28 30 4A 30 29     1			??0016 db "(0J0) -NUEVA PARTIDA- (0J0)",0
+	   20 2D 4E 55 45
+	   56 41 20 50 41
+	   52 54 49 44 41
+	   2D 20 28 30 4A
+	   30 29 00
+ 000002AC		     1		.code
+ 000002AC  52		     1			push edx  ; guardo en la pila el valor
+ 000002AD  BA 00000275 R     1			mov edx, offset ??0016
+ 000002B2  E8 00000000 E     1			call writestring
+ 000002B7  E8 00000000 E     1			call crlf
+ 000002BC  5A		     1			pop edx   ;recupero el valor original de edx
+								Salto
+ 00000291		     1		.data
+ 000002BD		     1		.code
+ 000002BD  E8 00000000 E     1			call crlf
+ 000002C2  C7 05 0000003B R					mov Vidas,10
+	   0000000A
+ 000002CC  C7 05 0000003F R					mov contador,0
+	   00000000
+ 000002D6  C7 05 00000043 R					mov LetrasDescubiertas,0
+	   00000000
+ 000002E0  C7 05 00000047 R					mov Elije,0
+	   00000000
+ 000002EA  E9 FFFFFD66					    jmp Play
 
 							Salto
- 000000A7		     1		.data
- 00000101		     1		.code
- 00000101  E8 00000000 E     1			call crlf
+ 00000291		     1		.data
+ 000002EF		     1		.code
+ 000002EF  E8 00000000 E     1			call crlf
 
-						exit	
+ 000002F4					Salir:
+						  exit	
 
- 0000010D				main20 ENDP
-					
-					END main20
-Microsoft (R) Macro Assembler Version 14.29.30133.0	    11/25/21 20:00:38
-Intro Cadena						     Symbols 2 - 1
+ 000002FB				ahorcado ENDP
+					END ahorcado
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    12/01/21 18:11:48
+JUEGO DEL AHORCAD					     Symbols 2 - 1
 
 
 
@@ -634,8 +933,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000000A7 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000010D Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000291 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000002FB Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -742,12 +1041,22 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main20 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000010D Public STDCALL
-  ciclo  . . . . . . . . . . . .	L Near	 00000027 _TEXT	
-  detener  . . . . . . . . . . .	L Near	 00000045 _TEXT	
-  MainMenu . . . . . . . . . . .	L Near	 00000079 _TEXT	
-  ciclo2 . . . . . . . . . . . .	L Near	 000000CE _TEXT	
-  continuar  . . . . . . . . . .	L Near	 000000DA _TEXT	
+ahorcado . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000002FB Public STDCALL
+  Play . . . . . . . . . . . . .	L Near	 00000055 _TEXT	
+  ciclo  . . . . . . . . . . . .	L Near	 0000007C _TEXT	
+  detener  . . . . . . . . . . .	L Near	 0000009A _TEXT	
+  MainMenu . . . . . . . . . . .	L Near	 000000CE _TEXT	
+  ciclo2 . . . . . . . . . . . .	L Near	 00000119 _TEXT	
+  continuar  . . . . . . . . . .	L Near	 0000012B _TEXT	
+  Comparar . . . . . . . . . . .	L Near	 00000154 _TEXT	
+  esigual  . . . . . . . . . . .	L Near	 00000164 _TEXT	
+  noesigual  . . . . . . . . . .	L Near	 000001C8 _TEXT	
+  Fin  . . . . . . . . . . . . .	L Near	 000001F0 _TEXT	
+  sale . . . . . . . . . . . . .	L Near	 000001FB _TEXT	
+  continua . . . . . . . . . . .	L Near	 00000277 _TEXT	
+  Reintentar . . . . . . . . . .	L Near	 0000027C _TEXT	
+  Jugar  . . . . . . . . . . . .	L Near	 000002AC _TEXT	
+  Salir  . . . . . . . . . . . .	L Near	 000002F4 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -757,10 +1066,29 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
-??0000 . . . . . . . . . . . . .	Byte	 00000052 _DATA	
-??0001 . . . . . . . . . . . . .	Byte	 00000066 _DATA	
-??0002 . . . . . . . . . . . . .	Byte	 0000007B _DATA	
-??0003 . . . . . . . . . . . . .	Byte	 00000093 _DATA	
+??0000 . . . . . . . . . . . . .	Byte	 0000005A _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 0000007B _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 0000009C _DATA	
+??0003 . . . . . . . . . . . . .	Byte	 000000BE _DATA	
+??0004 . . . . . . . . . . . . .	Byte	 000000DF _DATA	
+??0005 . . . . . . . . . . . . .	Byte	 00000101 _DATA	
+??0006 . . . . . . . . . . . . .	Byte	 00000115 _DATA	
+??0007 . . . . . . . . . . . . .	Byte	 00000137 _DATA	
+??0008 . . . . . . . . . . . . .	Byte	 0000014F _DATA	
+??0009 . . . . . . . . . . . . .	Byte	 00000163 _DATA	
+??000A . . . . . . . . . . . . .	Byte	 0000017F _DATA	
+??000B . . . . . . . . . . . . .	Byte	 00000191 _DATA	
+??000C . . . . . . . . . . . . .	Byte	 000001A2 _DATA	
+??000D . . . . . . . . . . . . .	Byte	 000001B3 _DATA	
+??000E . . . . . . . . . . . . .	Byte	 000001C5 _DATA	
+??000F . . . . . . . . . . . . .	Byte	 000001CC _DATA	
+??0010 . . . . . . . . . . . . .	Byte	 000001EE _DATA	
+??0011 . . . . . . . . . . . . .	Byte	 00000200 _DATA	
+??0012 . . . . . . . . . . . . .	Byte	 00000213 _DATA	
+??0013 . . . . . . . . . . . . .	Byte	 00000225 _DATA	
+??0014 . . . . . . . . . . . . .	Byte	 00000238 _DATA	
+??0015 . . . . . . . . . . . . .	Byte	 00000249 _DATA	
+??0016 . . . . . . . . . . . . .	Byte	 00000275 _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -785,6 +1113,8 @@ ENABLE_PROCESSED_OUTPUT  . . . .	Number	 00000001h
 ENABLE_WINDOW_INPUT  . . . . . .	Number	 00000008h   
 ENABLE_WRAP_AT_EOL_OUTPUT  . . .	Number	 00000002h   
 ENHANCED_KEY . . . . . . . . . .	Number	 00000100h   
+Elije  . . . . . . . . . . . . .	DWord	 00000047 _DATA	
+Espacio  . . . . . . . . . . . .	Byte	 0000002A _DATA	
 FALSE  . . . . . . . . . . . . .	Number	 00000000h   
 FILE_APPEND_DATA . . . . . . . .	Number	 00000004h   
 FILE_ATTRIBUTE_ARCHIVE . . . . .	Number	 00000020h   
@@ -843,6 +1173,7 @@ KEY_EVENT  . . . . . . . . . . .	Number	 00000001h
 KEY_MASKS  . . . . . . . . . . .	Number	 0000001Fh   
 LEFT_ALT_PRESSED . . . . . . . .	Number	 00000002h   
 LEFT_CTRL_PRESSED  . . . . . . .	Number	 00000008h   
+LetrasDescubiertas . . . . . . .	DWord	 00000043 _DATA	
 MB_ABORTRETRYIGNORE  . . . . . .	Number	 00000002h   
 MB_APPLMODAL . . . . . . . . . .	Number	 00000000h   
 MB_CANCELTRYCONTINUE . . . . . .	Number	 00000006h   
@@ -967,15 +1298,15 @@ VK_SPACE . . . . . . . . . . . .	Number	 00000020h
 VK_SUBTRACT  . . . . . . . . . .	Number	 0000006Dh   
 VK_TAB . . . . . . . . . . . . .	Number	 00000009h   
 VK_UP  . . . . . . . . . . . . .	Number	 00000026h   
+Vidas  . . . . . . . . . . . . .	DWord	 0000003B _DATA	
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-contador_20  . . . . . . . . . .	DWord	 0000003F _DATA	
+contador . . . . . . . . . . . .	DWord	 0000003F _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
-espacio_20 . . . . . . . . . . .	Byte	 0000002A _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
@@ -986,11 +1317,10 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-palabraEscondida_20  . . . . . .	Byte	 00000043 _DATA	
-palabraSeleccionada_20 . . . . .	Byte	 00000030 _DATA	
-palabras_20  . . . . . . . . . .	Byte	 00000000 _DATA	
+palabraEscondida . . . . . . . .	Byte	 0000004B _DATA	
+palabraSeleccionada  . . . . . .	Byte	 0000002C _DATA	
+palabras_arreglo . . . . . . . .	Byte	 00000000 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-vidas  . . . . . . . . . . . . .	DWord	 0000002C _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   

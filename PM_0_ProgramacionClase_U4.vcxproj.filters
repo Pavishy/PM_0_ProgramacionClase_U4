@@ -35,5 +35,6 @@
     <MASM Include="P18_Ejemplo2REP.asm" />
     <MASM Include="P19_EjemploPrefijosRepeticion.asm" />
     <MASM Include="P20_PlantillaProyectoUnidad.asm" />
+    <MASM Include="ProyectoFinal_JuegoAhorcado.asm" />
   </ItemGroup>
 </Project>
